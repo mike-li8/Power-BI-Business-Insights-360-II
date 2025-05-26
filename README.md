@@ -623,17 +623,12 @@ The image below shows the completed data model (snowflake schema) in Power BI Mo
 
 
 
-
-
-## DAX Calculated Columns
-
 <details>
-  <summary><b>Calculated Columns</b></summary>
+  <summary><b>DAX Calculated Columns</b></summary>
 
-### Calculated Columns
-To facilitate dashboard building, DAX expressions were used to create new columns in the tables `dim_date` and `Fact_Actuals_Estimates`
+To facilitate dashboard building, DAX expressions were used to create new columns in the tables `dim_date`, `dim_products`, and `Fact_Actuals_Estimates`
 
-#### Calculated Columns in `dim_date`
+### Calculated Columns in `dim_date`
 ```
 fiscal_quarter = 
 SWITCH(
@@ -648,7 +643,6 @@ SWITCH(
     "Q4"
 )
 ```
-
 ```
 ytd_ytg = 
 
@@ -673,7 +667,12 @@ IF(
 )
 ```
 
-#### Calculated Columns in `Fact_Actuals_Estimates`
+### Calculated Column in `dim_product`
+```
+product_and_variant = dim_product[product] & " [" & dim_product[variant] & "]"
+```
+
+### Calculated Columns in `Fact_Actuals_Estimates`
 ```
 post_invoice_deduction_amount =
 // Retrieve post invoice deduction percent for each row
