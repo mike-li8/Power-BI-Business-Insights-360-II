@@ -1306,9 +1306,4 @@ IF(
 )
 ```
 
-
-</details>
-<details>
-  <summary><b>Executive view Top/Bottom N</b></summary>
-
 </details>
