@@ -1087,7 +1087,7 @@ IF(
 )
 ```
 
-**Gross Margin Benchmark Measures**
+**Gross Margin % Benchmark Measures**
 ```
 GM_%_Target = 
 
@@ -1144,6 +1144,139 @@ IF(
     result
 )
 ```
+
+
+**Net Profit % Benchmark Measures**
+```
+NP_%_SPLY = 
+CALCULATE(
+    [NP_%],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+NP_%_Target = 
+
+VAR target = 
+DIVIDE(
+    SUM(fact_targets[np_target]),
+    SUM(fact_targets[ns_target]),
+    0
+)
+
+RETURN
+IF(
+    [Customer_Product_FilterContext_Check],
+    BLANK(),
+    target
+)
+```
+```
+NP_%_BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [NP_%_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, [NP_%_Target]
+)
+```
+```
+NP_% Variance from BM = 
+
+VAR result = [NP_%] - [NP_%_BM]
+
+RETURN
+IF(
+    ISBLANK([NP_%]) || ISBLANK([NP_%_BM]),
+    BLANK(),
+    result
+)
+```
+```
+NP_% Percentage Variance from BM = 
+
+VAR result = DIVIDE([NP_% Variance from BM], ABS([NP_%_BM]), 0)
+
+RETURN
+IF(
+    ISBLANK([NP_% Variance from BM]) || ISBLANK([NP_%_BM]),
+    BLANK(),
+    result
+)
+```
+
+**Supply Chain Benchmark Measures**
+YoY is the only benchmark available and/or applicable to supply chain KPIs.
+```
+Net_Error_SPLY = 
+CALCULATE(
+    [Net_Error],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+Net_Error_BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [Net_Error_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, BLANK()
+)
+```
+```
+ABS_Error_SPLY = 
+CALCULATE(
+    [ABS_Error],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+ABS_Error_BM = 
+
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [ABS_Error_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, BLANK()
+)
+```
+```
+ABS_Error_Percentage_Variance_from_BM = 
+
+VAR result = DIVIDE([ABS_Error] - [ABS_Error_BM], ABS([ABS_Error_BM]), 0)
+
+RETURN
+IF(
+    ISBLANK([ABS_Error]) || ISBLANK([ABS_Error_BM]),
+    BLANK(),
+    result
+)
+```
+```
+Forecast_Accuracy_%_SPLY = 
+CALCULATE(
+    [Forecast_Accuracy_%],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+Forecast_Accuracy_%_BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [Forecast_Accuracy_%_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, BLANK()
+)
+```
+```
+Forecast_Accuracy_%_Percentage_Variance_from_BM = 
+
+VAR result = DIVIDE([Forecast_Accuracy_%] - [Forecast_Accuracy_%_BM], ABS([Forecast_Accuracy_%_BM]), 0)
+
+RETURN
+IF(
+    ISBLANK([Forecast_Accuracy_%]) || ISBLANK([Forecast_Accuracy_%_BM]),
+    BLANK(),
+    result
+)
+```
+
 
 </details>
 
