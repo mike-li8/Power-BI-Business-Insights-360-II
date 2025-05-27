@@ -912,7 +912,101 @@ At AtliQ Technologies, supply chain metrics must be calculated for **each produc
 
 
 
+Sold Quantity
+```
+Sold_Quantity = 
+CALCULATE(
+    SUM(FactActualsEstimates[Qty]),
+    FILTER(
+        FactActualsEstimates,
+        FactActualsEstimates[date] <= [Most_Recent_Month_With_Sales_Data]
+    )
+)
+```
 
+Forecasted Quantity
+```
+Forecasted_Quantity = 
+CALCULATE(
+    SUM(fact_forecast_monthly[forecast_quantity]),
+    FILTER(
+        fact_forecast_monthly,
+        fact_forecast_monthly[date] <= [Most_Recent_Month_With_Sales_Data]
+    )
+)
+```
+
+Net Error and Inventory Risk
+```
+Net_Error = 
+IF(
+    ISBLANK([Sold_Quantity]) || ISBLANK([Forecasted_Quantity]),
+    BLANK(),
+    [Forecasted_Quantity] - [Sold_Quantity]
+)
+```
+```
+Inventory_Risk = 
+SWITCH(
+    TRUE(),
+    ISBLANK([Sold_Quantity]) || ISBLANK([Forecasted_Quantity]),
+    BLANK(),
+    [Net_Error] > 0,
+    "🔼 EI",
+    [Net_Error] = 0,
+    "PI",
+    [Net_Error] < 0,
+    "🚫 OOS"
+)
+```
+
+Absolute Error
+```
+ABS_Error = 
+
+VAR result = 
+SUMX(
+    DISTINCT(dim_date[month]),
+    SUMX(
+        DISTINCT(dim_product[product_code]),
+        ABS([Net_Error])
+    )
+)
+
+RETURN
+IF(
+    ISBLANK([Sold_Quantity]) || ISBLANK([Forecasted_Quantity]),
+    BLANK(),
+    result
+)
+```
+```
+ABS_Error_% = 
+
+VAR result = 
+DIVIDE(
+    [ABS_Error],
+    [Forecasted_Quantity],
+    0
+)
+
+RETURN
+IF(
+    ISBLANK([Sold_Quantity]) || ISBLANK([Forecasted_Quantity]),
+    BLANK(),
+    result
+)
+```
+
+Forecast Accuracy %
+```
+Forecast_Accuracy_% = 
+IF(
+    ISBLANK([ABS_Error_%]),
+    BLANK(),
+    1 - [ABS_Error_%]
+)
+```
 
 </details>
 
