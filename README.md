@@ -911,6 +911,10 @@ At AtliQ Technologies, supply chain metrics must be calculated for **each produc
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/SupplyChain%20Example.PNG)
 
 
+Last Sales Month
+```
+Most_Recent_Month_With_Sales_Data = MAX(LastSalesMonth[LastSalesMonth])
+```
 
 Sold Quantity
 ```
