@@ -769,45 +769,58 @@ RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 
 ## DAX Measures
 
-
 <details>
-  <summary><b>DAX Measures for P&L Values</b></summary>
-
-
+  <summary><b>Main KPIs</b></summary>
 
 
 </details>
 
 <details>
-  <summary><b>Supply Chain Example</b></summary>
+  <summary><b>Supply Chain KPIs</b></summary>
+
+</details>
+
+## Dynamic Benchmark
+
+<details>
+  <summary><b>DAX Table</b></summary>
 
 </details>
 
 <details>
-  <summary><b>Supply Chain Measures</b></summary>
+  <summary><b>DAX Measures</b></summary>
+
+</details>
+
+## Finance View P&L
+
+<details>
+  <summary><b>Table for P&L Rows</b></summary>
 
 </details>
 
 <details>
-  <summary><b>Dynamic Benchmark</b></summary>
+  <summary><b>Table for P&L Columns</b></summary>
 
 </details>
 
 <details>
-  <summary><b>Finance View P&L Measures</b></summary>
+  <summary><b>DAX Measures</b></summary>
 
 </details>
 
 <details>
-  <summary><b>Finance View MoM Chart</b></summary>
+  <summary><b>MoM Chart</b></summary>
 
 </details>
 
+## Numeric Range Parameter
 <details>
   <summary><b>Sales View Numeric Range Parameter</b></summary>
 
 </details>
 
+## Executive view Top/Bottom N
 <details>
   <summary><b>Executive view Top/Bottom N</b></summary>
 
