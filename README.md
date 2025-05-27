@@ -1308,7 +1308,7 @@ IF(
 
 </details>
 
-## Finance View P&L
+## Finance View P&L Visuals
 
 <details>
   <summary><b>Table for P&L Rows</b></summary>
@@ -1427,8 +1427,190 @@ IF(
 
 </details>
 
+
 <details>
-  <summary><b>MoM Chart</b></summary>
+  <summary><b>P&L Value Numeric Format</b></summary>
+
+```
+P & L Value Basic Numeric Format = 
+
+VAR val = [P & L Value]
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(val),
+    BLANK(),
+    MAX('P & L Rows'[Primary_Key]) IN {13,17},
+    val * 100,
+    MAX('P & L Rows'[Primary_Key]) IN {14,20},
+    val,
+    MAX('P & L Rows'[Primary_Key]) IN {1,2,3,4,5,6,7,8,9,10,11,12,15,16,18,19},
+    val / 1000000
+)
+```
+```
+P & L BM Basic Numeric Format = 
+
+VAR val = [P & L BM]
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(val),
+    BLANK(),
+    MAX('P & L Rows'[Primary_Key]) IN {13,17},
+    val * 100,
+    MAX('P & L Rows'[Primary_Key]) IN {14,20},
+    val,
+    MAX('P & L Rows'[Primary_Key]) IN {1,2,3,4,5,6,7,8,9,10,11,12,15,16,18,19},
+    val / 1000000
+)
+```
+```
+P & L Value LM Basic Numeric Format = 
+CALCULATE(
+    [P & L Value Basic Numeric Format],
+    PARALLELPERIOD(
+        dim_date[date],
+        -1,
+        MONTH
+    )
+)
+```
+```
+P & L Value MoM Pct Chg = 
+
+VAR result = DIVIDE([P & L Value Basic Numeric Format] - [P & L Value LM Basic Numeric Format], ABS([P & L Value LM Basic Numeric Format]), 0)
+
+RETURN
+IF(
+    ISBLANK([P & L Value Basic Numeric Format]) || ISBLANK([P & L Value LM Basic Numeric Format]),
+    BLANK(),
+    result
+)
+```
+
+</details>
+
+
+
+<details>
+  <summary><b>P&L Value Styled Format</b></summary>
+
+```
+P & L Value Styled Format = 
+
+VAR val = [P & L Value]
+VAR current_row_context = MAX('P & L Rows'[Primary_Key])
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(val),
+    BLANK(),
+    current_row_context IN {13,17},
+    FORMAT(val, "0.00%"),
+    current_row_context IN {1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,18,19,20},
+    SWITCH(
+        TRUE(),
+        ABS(val) >= 1000000,
+        FORMAT(val/1000000, "$#,##0.00M"),
+        ABS(val) >= 1000,
+        FORMAT(val/1000, "$#,##0.00K"),
+        FORMAT(val, "$#,##0.##")
+    )
+)
+```
+
+```
+P & L BM Styled Format = 
+
+VAR val = [P & L BM]
+VAR current_row_context = MAX('P & L Rows'[Primary_Key])
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(val),
+    BLANK(),
+    current_row_context IN {13,17},
+    FORMAT(val, "0.00%"),
+    current_row_context IN {1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,18,19,20},
+    SWITCH(
+        TRUE(),
+        ABS(val) >= 1000000,
+        FORMAT(val/1000000, "$#,##0.00M"),
+        ABS(val) >= 1000,
+        FORMAT(val/1000, "$#,##0.00K"),
+        FORMAT(val, "$#,##0.##")
+    )
+)
+```
+
+```
+P & L Value Variance From BM Styled Format = 
+
+VAR val = [P & L Value Variance From BM]
+VAR current_row_context = MAX('P & L Rows'[Primary_Key])
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(val),
+    BLANK(),
+    current_row_context IN {13,17},
+    FORMAT(val, "0.00%"),
+    current_row_context IN {1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,18,19,20},
+    SWITCH(
+        TRUE(),
+        ABS(val) >= 1000000,
+        FORMAT(val/1000000, "$#,##0.00M"),
+        ABS(val) >= 1000,
+        FORMAT(val/1000, "$#,##0.00K"),
+        FORMAT(val, "$#,##0.##")
+    )
+)
+```
+```
+P & L Value Percentage Variance From BM Styled Format = 
+
+SWITCH(
+    TRUE(),
+    ISBLANK([P & L Value Percentage Variance From BM]),
+    BLANK(),
+    FORMAT([P & L Value Percentage Variance From BM], "0.00%")
+)
+```
+```
+P & L Final Value = 
+
+VAR selected_BM = SELECTEDVALUE(Benchmark_Switch_Table[Primary_Key])
+VAR current_column_context = MAX('P & L Columns'[Primary_Key])
+
+RETURN
+SWITCH(
+    TRUE(),
+    selected_BM = 1,
+    SWITCH(
+        TRUE(),
+        current_column_context = 1, [P & L Value Styled Format],
+        current_column_context = 2, [P & L BM Styled Format],
+        current_column_context = 4, [P & L Value Variance From BM Styled Format],
+        current_column_context = 6, [P & L Value Percentage Variance From BM Styled Format],
+        current_column_context = 8, [P & L Value Percentage Variance from BM ConditionalFormatting]
+    ),
+    selected_BM = 2,
+    SWITCH(
+        TRUE(),
+        current_column_context = 1, [P & L Value Styled Format],
+        current_column_context = 3, [P & L BM Styled Format],
+        current_column_context = 5, [P & L Value Variance From BM Styled Format],
+        current_column_context = 7, [P & L Value Percentage Variance From BM Styled Format],
+        current_column_context = 8, [P & L Value Percentage Variance from BM ConditionalFormatting]
+    )
+)
+```
 
 </details>
 
