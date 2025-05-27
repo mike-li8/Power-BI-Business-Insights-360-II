@@ -907,6 +907,13 @@ DIVIDE(
 <details>
   <summary><b>Supply Chain KPIs</b></summary>
 
+At AtliQ Technologies, supply chain metrics must be calculated for **each product on a montly level**. The screenshot below gives an example of how supply chain metrics are calculated for **one specific product** for a given fiscal year.
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/SupplyChain%20Example.PNG)
+
+
+
+
+
 </details>
 
 ## Dynamic Benchmark
