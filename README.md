@@ -754,3 +754,42 @@ var res = CALCULATE(
 RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 ```
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+## DAX Measures
+
+
+<details>
+  <summary><b>Main P&L Measures</b></summary>
+
+</details>
+
+<details>
+  <summary><b>Supply Chain Example</b></summary>
+
+</details>
+
+<details>
+  <summary><b>Supply Chain Measures</b></summary>
+
+</details>
+
+<details>
+  <summary><b>Dynamic Benchmark</b></summary>
+
+</details>
+
+
+
+
