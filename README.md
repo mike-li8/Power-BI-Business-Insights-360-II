@@ -1692,6 +1692,31 @@ SWITCH(
 <details>
   <summary><b>Sales View Numeric Range Parameter</b></summary>
 
+To create a single value slicer where users can filter the scatter chart to only show points where gross margin % is greater than or equal to the slicer value:
+![image alt]()
+Create a numeric range parameter:
+```
+NumericRangeParameter_SalesView_GM_% = GENERATESERIES(0, 100, 1)
+```
+
+Create a measure to retrieve the gross margin % value entered/selected by the user:
+```
+NumericRangeParameter_Selected_GM_%_Value = SELECTEDVALUE('NumericRangeParameter_SalesView_GM_%'[GM_%_Value])
+```
+
+Create a measure to filter the points in the sales view scatter chart:
+```
+SalesView_ScatterChart_GM_%_Filter = 
+IF(
+    AND(
+        NOT(ISBLANK([GM_%])),
+        [GM_%] >= [NumericRangeParameter_Selected_GM_%_Value]/100
+    ),
+    "SHOW",
+    "HIDE"
+)
+```
+
 </details>
 
 ## Executive view Top/Bottom N
