@@ -771,7 +771,10 @@ RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 
 
 <details>
-  <summary><b>Main P&L Measures</b></summary>
+  <summary><b>DAX Measures for P&L Values</b></summary>
+
+
+
 
 </details>
 
@@ -790,6 +793,22 @@ RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 
 </details>
 
+<details>
+  <summary><b>Finance View P&L Measures</b></summary>
 
+</details>
 
+<details>
+  <summary><b>Finance View MoM Chart</b></summary>
 
+</details>
+
+<details>
+  <summary><b>Sales View Numeric Range Parameter</b></summary>
+
+</details>
+
+<details>
+  <summary><b>Executive view Top/Bottom N</b></summary>
+
+</details>
