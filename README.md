@@ -772,8 +772,137 @@ RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 <details>
   <summary><b>Main KPIs</b></summary>
 
+Gross Sales
+```
+GS_$ = SUM(FactActualsEstimates[gross_sales_amount])
+```
+
+Net Invoice Sales
+```
+NIS_$ = SUM(FactActualsEstimates[net_invoice_sales_amount])
+```
+
+Pre Invoice Deductions
+```
+Pre_Invoice_Deduction_$ = [GS_$] - [NIS_$]
+```
+
+Post Invoice Deductions
+```
+Post_Invoice_Deduction_Main_$ = SUM(FactActualsEstimates[post_invoice_deduction_amount])
+```
+```
+Post_Invoice_Deduction_Other_$ = SUM(FactActualsEstimates[post_invoice_other_deduction_amount])
+```
+```
+Post_Invoice_Deduction_Total_$ = [Post_Invoice_Deduction_Main_$] + [Post_Invoice_Deduction_Other_$]
+```
+
+Net Sales
+```
+NS_$ = SUM(FactActualsEstimates[net_sales_amount])
+```
+
+Cost of Goods Sold (COGS)
+```
+Manufacturing_Cost_$ = SUM(FactActualsEstimates[manufacturing_cost])
+```
+```
+Freight_Cost_$ = SUM(FactActualsEstimates[freight_cost])
+```
+```
+Other_Cost_$ = SUM(FactActualsEstimates[other_cost])
+```
+```
+Total_COGS_$ = [Manufacturing_Cost_$] + [Freight_Cost_$] + [Other_Cost_$]
+```
+
+Gross Margin
+```
+GM_$ = [NS_$] - [Total_COGS_$]
+```
+```
+GM_% = DIVIDE([GM_$], [NS_$], 0)
+```
+```
+GM / Unit = DIVIDE([GM_$], SUM(FactActualsEstimates[Qty]), 0)
+```
+
+Operational Expenses
+```
+Ads_&_Promotions_$ = SUM(FactActualsEstimates[ads_promotion])
+```
+```
+Other_Operational_Expense_$ = SUM(FactActualsEstimates[other_operational_expense])
+```
+```
+Total_Operational_Expense_$ = [Ads_&_Promotions_$] + [Other_Operational_Expense_$]
+```
+
+Net Profit
+```
+NP_$ = [GM_$] - [Total_Operational_Expense_$]
+```
+```
+NP_% = DIVIDE([NP_$], [NS_$], 0)
+```
+```
+NP / Unit = DIVIDE([NP_$], SUM(FactActualsEstimates[Qty]), 0)
+```
+
+Marketshare
+```
+AtliQ_PC_Marketshare_% = 
+
+VAR atliq_sales = 
+CALCULATE(
+    SUM(marketshare[sales_$]),
+    marketshare[Manufacturer] = "atliq"
+)
+
+VAR total_market_sales = 
+CALCULATE(
+    SUM(marketshare[total_market_sales_$]),
+    marketshare[Manufacturer] = "atliq"
+)
+
+RETURN
+DIVIDE(
+    atliq_sales,
+    total_market_sales,
+    0
+)
+```
+```
+PC_Marketshare_% = 
+DIVIDE(
+    SUM(marketshare[sales_$]),
+    SUM(marketshare[total_market_sales_$]),
+    0
+)
+```
+
+Revenue Contribution %
+```
+RC_% = 
+DIVIDE(
+    [NS_$],
+    CALCULATE(
+        [NS_$],
+        ALL(dim_market),
+        ALL(dim_customer),
+        ALL(dim_product)
+    ),
+    0
+)
+```
 
 </details>
+
+
+
+
+
 
 <details>
   <summary><b>Supply Chain KPIs</b></summary>
