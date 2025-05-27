@@ -1340,7 +1340,7 @@ UNION(
 </details>
 
 <details>
-  <summary><b>DAX Measures</b></summary>
+  <summary><b>DAX Measures for P&L Values</b></summary>
 
 
 `P & L Value` returns the appropriate measure, depending on the filter context of `'P & L Rows'[Primary_Key]`
@@ -1429,7 +1429,68 @@ IF(
 
 
 <details>
-  <summary><b>P&L Value Numeric Format</b></summary>
+  <summary><b>DAX Measures for % Variance from BM Conditional Formatting</b></summary>
+
+```
+P & L Value Percentage Variance from BM ConditionalFormatting = 
+
+VAR current_p_and_l_row_context = SELECTEDVALUE('P & L Rows'[Primary_Key])
+VAR selected_bm = SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key])
+VAR p_and_l_pct_var_from_BM = [P & L Value Percentage Variance From BM]
+
+VAR good = "🟢"
+VAR bad = "🔴"
+VAR neutral = "⚪️"
+
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(p_and_l_pct_var_from_BM),
+    BLANK(),
+    selected_bm = 1,
+    SWITCH(
+        TRUE(),
+        current_p_and_l_row_context IN({7,12,13,14,16,17,20}),
+        SWITCH(
+            TRUE(),
+            p_and_l_pct_var_from_BM < 0,
+            bad,
+            p_and_l_pct_var_from_BM = 0,
+            neutral,
+            p_and_l_pct_var_from_BM > 0,
+            good
+        ),
+        current_p_and_l_row_context IN({8,9,10,11,15,18,19}),
+        SWITCH(
+            TRUE(),
+            p_and_l_pct_var_from_BM < 0,
+            good,
+            p_and_l_pct_var_from_BM = 0,
+            neutral,
+            p_and_l_pct_var_from_BM > 0,
+            bad
+        ),
+        BLANK()
+    ),
+    selected_bm = 2,
+    SWITCH(
+        TRUE(),
+        p_and_l_pct_var_from_BM < 0,
+        bad,
+        p_and_l_pct_var_from_BM = 0,
+        neutral,
+        p_and_l_pct_var_from_BM > 0,
+        good
+    )
+)
+```
+
+</details>
+
+
+
+<details>
+  <summary><b>DAX Measures for P&L Value Numeric Format</b></summary>
 
 ```
 P & L Value Basic Numeric Format = 
@@ -1496,7 +1557,7 @@ IF(
 
 
 <details>
-  <summary><b>P&L Value Styled Format</b></summary>
+  <summary><b>DAX Measures for P&L Value Styled Format</b></summary>
 
 ```
 P & L Value Styled Format = 
@@ -1613,6 +1674,14 @@ SWITCH(
 ```
 
 </details>
+
+
+
+
+
+
+
+
 
 ## Numeric Range Parameter
 <details>
