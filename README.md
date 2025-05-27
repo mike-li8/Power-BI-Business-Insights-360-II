@@ -1284,11 +1284,29 @@ IF(
 
 <details>
   <summary><b>Table for P&L Rows</b></summary>
+A table `P & L Rows` was manually entered using Power Query:
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/P%20and%20L%20Rows.PNG)
 
 </details>
 
 <details>
   <summary><b>Table for P&L Columns</b></summary>
+
+To create a table for P&L Columns, a DAX calculated table `P & L Columns` was created:
+```
+P & L Columns = 
+UNION(
+    ROW("Primary_Key", 1, "Sort_Order", 1, "Column_Header", "P&L Value"),
+    ROW("Primary_Key", 2, "Sort_Order", 2, "Column_Header", "SPLY"),
+    ROW("Primary_Key", 3, "Sort_Order", 2, "Column_Header", "Target"),
+    ROW("Primary_Key", 4, "Sort_Order", 3, "Column_Header", "YoY Change"),
+    ROW("Primary_Key", 5, "Sort_Order", 3, "Column_Header", "Variance from Target"),
+    ROW("Primary_Key", 6, "Sort_Order", 4, "Column_Header", "YoY Change %"),
+    ROW("Primary_Key", 7, "Sort_Order", 4, "Column_Header", "% Variance from Target"),
+    ROW("Primary_Key", 8, "Sort_Order", 5, "Column_Header", " ")
+)
+```
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/P%20and%20L%20Columns.PNG)
 
 </details>
 
