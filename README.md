@@ -5,7 +5,7 @@ The [Codebasics](https://codebasics.io/) [Data Analytics Bootcamp](https://codeb
 
 The objective of this project is to create a Power BI dashboard which stakeholders from various business verticals (**finance**, **sales**, **marketing**, **supply chain**, and **executive**) can use to effectively and efficiently gather insights from data to help inform important company decisions. The interactive and visual nature of Power BI dashboards should help stakeholders better interpret the data with less time compared to static reports produced in Excel.
 
-This README file provides a high-level technical overview of the project.
+This README file provides some business context about the fictional company AtliQ Technologies, as well as a high-level technical overview of the project.
 
 
 ## 📊 Interactive Dashboard on Power BI Service
