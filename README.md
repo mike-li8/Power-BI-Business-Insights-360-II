@@ -1087,6 +1087,20 @@ IF(
 )
 ```
 
+**Gross Margin Benchmark Measures**
+```
+GM_$_Target = 
+
+VAR target = SUM(fact_targets[gm_target])
+
+RETURN
+IF(
+    [Customer_Product_FilterContext_Check],
+    BLANK(),
+    target
+)
+```
+
 **Gross Margin % Benchmark Measures**
 ```
 GM_%_Target = 
@@ -1142,6 +1156,20 @@ IF(
     ISBLANK([GM_% Variance from BM]) || ISBLANK([GM_%_BM]),
     BLANK(),
     result
+)
+```
+
+**Net Profit Benchmark Measures**
+```
+NP_$_Target = 
+
+VAR target = SUM(fact_targets[np_target])
+
+RETURN
+IF(
+    [Customer_Product_FilterContext_Check],
+    BLANK(),
+    target
 )
 ```
 
@@ -1284,6 +1312,7 @@ IF(
 
 <details>
   <summary><b>Table for P&L Rows</b></summary>
+
 A table `P & L Rows` was manually entered using Power Query:
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/P%20and%20L%20Rows.PNG)
 
@@ -1312,6 +1341,89 @@ UNION(
 
 <details>
   <summary><b>DAX Measures</b></summary>
+
+
+`P & L Value` returns the appropriate measure, depending on the filter context of `'P & L Rows'[Primary_Key]`
+```
+P & L Value = 
+SWITCH(
+    TRUE(),
+    MAX('P & L Rows'[Primary_Key]) = 1, [GS_$],
+    MAX('P & L Rows'[Primary_Key]) = 2, [Pre_Invoice_Deduction_$],
+    MAX('P & L Rows'[Primary_Key]) = 3, [NIS_$],
+    MAX('P & L Rows'[Primary_Key]) = 4, [Post_Invoice_Deduction_Main_$],
+    MAX('P & L Rows'[Primary_Key]) = 5, [Post_Invoice_Deduction_Other_$],
+    MAX('P & L Rows'[Primary_Key]) = 6, [Post_Invoice_Deduction_Total_$],
+    MAX('P & L Rows'[Primary_Key]) = 7, [NS_$],
+    MAX('P & L Rows'[Primary_Key]) = 8, [Manufacturing_Cost_$],
+    MAX('P & L Rows'[Primary_Key]) = 9, [Freight_Cost_$],
+    MAX('P & L Rows'[Primary_Key]) = 10, [Other_Cost_$],
+    MAX('P & L Rows'[Primary_Key]) = 11, [Total_COGS_$],
+    MAX('P & L Rows'[Primary_Key]) = 12, [GM_$],
+    MAX('P & L Rows'[Primary_Key]) = 13, [GM_%],
+    MAX('P & L Rows'[Primary_Key]) = 14, [GM / Unit],
+    MAX('P & L Rows'[Primary_Key]) = 15, [Total_Operational_Expense_$],
+    MAX('P & L Rows'[Primary_Key]) = 16, [NP_$],
+    MAX('P & L Rows'[Primary_Key]) = 17, [NP_%],
+    MAX('P & L Rows'[Primary_Key]) = 18, [Ads_&_Promotions_$],
+    MAX('P & L Rows'[Primary_Key]) = 19, [Other_Operational_Expense_$],
+    MAX('P & L Rows'[Primary_Key]) = 20, [NP / Unit]
+)
+```
+
+**P&L value benchmark measures**
+`P & L Target` returns the target P&L value (if avaliable), depending on the filter context of `'P & L Rows'[Primary_Key]`
+```
+P & L Target = 
+SWITCH(
+    TRUE(),
+    MAX('P & L Rows'[Primary_Key]) = 7, [NS_$_Target],
+    MAX('P & L Rows'[Primary_Key]) = 12, [GM_$_Target],
+    MAX('P & L Rows'[Primary_Key]) = 13, [GM_%_Target],
+    MAX('P & L Rows'[Primary_Key]) = 16, [NP_$_Target],
+    MAX('P & L Rows'[Primary_Key]) = 17, [NP_%_Target]
+)
+```
+`P & L Value SPLY` returns the P&L value for the same period last year (YoY)
+```
+P & L Value SPLY = 
+CALCULATE(
+    [P & L Value],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+P & L BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [P & L Value SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, [P & L Target]
+)
+```
+```
+P & L Value Variance From BM = 
+
+var result = [P & L Value] - [P & L BM]
+
+RETURN
+IF(
+    ISBLANK([P & L Value]) || ISBLANK([P & L BM]),
+    BLANK(),
+    result
+)
+```
+```
+P & L Value Percentage Variance From BM = 
+
+var result = DIVIDE([P & L Value Variance From BM], ABS([P & L BM]), 0)
+
+RETURN
+IF(
+    ISBLANK([P & L Value Variance From BM]) || ISBLANK([P & L BM]),
+    BLANK(),
+    result
+)
+```
 
 </details>
 
