@@ -1015,9 +1015,25 @@ IF(
 </details>
 
 ## Dynamic Benchmark
-
 <details>
   <summary><b>DAX Table</b></summary>
+This dashboard enables users to compare certain KPIs against two types of benchmarks. A toggle switch allows users to switch between the following benchmark options:
+1.	Year-over-Year (YoY) – Compares KPI values for the current time period to the same time period in the previous year.
+2.	Target – Compares current KPI values to predefined business targets set by stakeholders.
+
+To create this toggle switch (using slicer visual):<br>
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20toggle%20switch.PNG)<br>
+where the user can choose which benchmark to show, a DAX calculated table `Benchmark_Switch_Table` was created:
+```
+Benchmark_Switch_Table = 
+UNION(
+    ROW("Primary_Key", 1, "Selection", "YoY"),
+    ROW("Primary_Key", 2, "Selection", "Target")
+)
+```
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20Switch%20table.PNG)
+
+
 
 </details>
 
