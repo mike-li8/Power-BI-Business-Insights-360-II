@@ -1542,7 +1542,12 @@ CALCULATE(
 ```
 P & L Value MoM Pct Chg = 
 
-VAR result = DIVIDE([P & L Value Basic Numeric Format] - [P & L Value LM Basic Numeric Format], ABS([P & L Value LM Basic Numeric Format]), 0)
+VAR result =
+DIVIDE(
+    [P & L Value Basic Numeric Format] - [P & L Value LM Basic Numeric Format],
+    ABS([P & L Value LM Basic Numeric Format]),
+    0
+)
 
 RETURN
 IF(
