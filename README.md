@@ -1087,19 +1087,63 @@ IF(
 )
 ```
 
+**Gross Margin Benchmark Measures**
+```
+GM_%_Target = 
 
+VAR target = 
+DIVIDE(
+    SUM(fact_targets[gm_target]),
+    SUM(fact_targets[ns_target]),
+    0
+)
 
+RETURN
+IF(
+    [Customer_Product_FilterContext_Check],
+    BLANK(),
+    target
+)
+```
+```
+GM_%_SPLY = 
+CALCULATE(
+    [GM_%],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+GM_%_BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [GM_%_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, [GM_%_Target]
+)
+```
+```
+GM_% Variance from BM = 
 
+VAR result = [GM_%] - [GM_%_BM]
 
+RETURN
+IF(
+    ISBLANK([GM_%]) || ISBLANK([GM_%_BM]),
+    BLANK(),
+    result
+)
+```
+```
+GM_% Percentage Variance from BM = 
 
+VAR result = DIVIDE([GM_% Variance from BM], ABS([GM_%_BM]), 0)
 
-
-
-
-
-
-
-
+RETURN
+IF(
+    ISBLANK([GM_% Variance from BM]) || ISBLANK([GM_%_BM]),
+    BLANK(),
+    result
+)
+```
 
 </details>
 
