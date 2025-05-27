@@ -1021,6 +1021,7 @@ This dashboard enables users to compare certain KPIs against two types of benchm
 1.	Year-over-Year (YoY) – Compares KPI values for the current time period to the same time period in the previous year.
 2.	Target – Compares current KPI values to predefined business targets set by stakeholders.
 
+
 To create this toggle switch (using slicer visual):<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20toggle%20switch.PNG)<br>
 where the user can choose which benchmark to show, a DAX calculated table `Benchmark_Switch_Table` was created:
@@ -1033,12 +1034,72 @@ UNION(
 ```
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20Switch%20table.PNG)
 
-
-
 </details>
 
 <details>
   <summary><b>DAX Measures</b></summary>
+
+**Filter Context Check**
+Target benchmark data is only avaliable for the following KPIs: net sales, gross margin, and net profit. Since target data is only avaliable at the market level, the target benchmark should not be displayed when more granular filters such as products or customers are applied. To enforce this logic, the following DAX expression is used to check the filter context:
+```
+Customer_Product_FilterContext_Check = ISCROSSFILTERED(dim_product[product]) || ISFILTERED(dim_customer[customer])
+```
+When this measure returns true, it is not appropriate to display the target benchmark values related to net sales, gross margin, and net profit.
+
+**Net Sales Benchmark Measures**
+```
+NS_$_SPLY = 
+CALCULATE(
+    [NS_$],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
+NS_$_Target = 
+
+VAR target = SUM(fact_targets[ns_target])
+
+RETURN
+IF(
+    [Customer_Product_FilterContext_Check],
+    BLANK(),
+    target
+)
+```
+```
+NS_$_BM = 
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 1, [NS_$_SPLY],
+    SELECTEDVALUE('Benchmark_Switch_Table'[Primary_Key]) = 2, [NS_$_Target]
+)
+```
+```
+NS_$ Percentage Variance from BM = 
+
+VAR result = DIVIDE([NS_$] - [NS_$_BM], ABS([NS_$_BM]), 0)
+
+RETURN
+IF(
+    ISBLANK([NS_$]) || ISBLANK([NS_$_BM]),
+    BLANK(),
+    result
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </details>
 
