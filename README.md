@@ -469,8 +469,8 @@ This query generates a single date value representing the most recent date the r
 **Create new query: `Combine Sales and Forecast`**
 
 `Combine Sales and Forecast` needs to have:
-1. Actual sales data from `fact_sales_monthly` up to and including the most recent month with sales data (December 2021).
-2. Forecasted sales data from `fact_forecast_monthly` starting from January 2022 onwards
+1. Actual sales data from `fact_sales_monthly` for the time period up to and including the most recent month with sales data
+2. Forecasted sales data from `fact_forecast_monthly` for the time period after the most recent month with sales data
 
 `Combine Sales and Forecast` needs to combine the `fact_sales_monthly` query with the `fact_forecast_monthly` query based on the diagram below (similar to SQL Union):
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Combined%20Sales%20and%20Forecast%20Diagram.PNG)
