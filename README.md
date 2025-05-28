@@ -503,6 +503,7 @@ This query performs the following steps:
 * Left join `Combine Sales and Forecast` with `pre_invoice_deductions`
 * Add calculated column for gross sales
 * Add calculated column for net invoice sales
+* Remove unnecessary columns, set appropriate datatype for columns
 
 ```
 let
