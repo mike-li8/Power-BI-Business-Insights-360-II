@@ -467,9 +467,17 @@ This query generates a single date value representing the most recent date the r
 <br>
 
 **Create new query: `Combine Sales and Forecast`**
+
+`Combine Sales and Forecast` contains:
+1. Actual sales data from `fact_sales_monthly` up to and including the most recent month with sales data (December 2021).
+2. Forecasted sales data from `fact_forecast_monthly` starting from January 2022 onwards
+
+`Combine Sales and Forecast` needs to combine the `fact_sales_monthly` query with the `fact_forecast_monthly` query based on the diagram below (similar to SQL Union):
+![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Combined%20Sales%20and%20Forecast%20Diagram.PNG)
+
 ```
 let
-    // Filter the forecast table to only include records with dates where sales data is not avaliable
+    // Filter the forecast table to only include records after the most recent month sales data was available
     #"FilterForecastTable" = Table.SelectRows(fact_forecast_monthly, each [date] > Last_Sales_Month),
 
     // Rename sold_quanity column in sales table to Qty
@@ -485,13 +493,6 @@ in
 ```
 Sample records from query result:<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Combined%20Sales%20and%20Forecast.PNG)
-
-`Combine Sales and Forecast` query combines the `fact_sales_monthly` query with the `fact_forecast_monthly` query based on the diagram below (similar to SQL Union):
-![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Combined%20Sales%20and%20Forecast%20Diagram.PNG)
-
-`Combine Sales and Forecast` contains:
-1. All sales data from `fact_sales_monthly` up to and including the last sales month (December 2021).
-2. Forecasted sales data from `fact_forecast_monthly` starting from January 2022 onwards.
 
 <br>
 
