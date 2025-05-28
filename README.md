@@ -369,7 +369,7 @@ Notes:
 
 Notes:
 * Provided in .xlsx format
-* Target data only is available for fiscal year 2022 and only available for the KPIs: net sales, gross margin, and net profit
+* Target data is only available for fiscal year 2022 and only available for the KPIs: net sales, gross margin, and net profit
 * Target data is available for each specific market on a monthly level
 * The columns `market`, and `month` make up a **composite primary key**.
 
