@@ -43,7 +43,6 @@ AtliQ's customers are categorized into three different **channels**:
    * Stores owned by AtliQ. These are AltiQ Exclusive and AtliQ E-Store.
 5. Distributor
    * Some markets have laws/regulations which only allow AtliQ to sell products to a distributor type customer within that market. AtliQ sells products to the distributor; the distributor then sells the products to various stores within that market.
-
 <br>
 
 </details>
