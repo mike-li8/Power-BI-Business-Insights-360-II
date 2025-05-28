@@ -408,7 +408,6 @@ Notes:
 
 ## ETL (Extract Transform Load) using Power Query
 
-
 <details>
   <summary><b>Import Data</b></summary>
 
@@ -419,6 +418,8 @@ The data tables from MySQL, .csv, and .xlsx were imported into **Power Query**:<
 
 <details>
   <summary><b>Additional Queries</b></summary>
+
+<br>
 
 **Add step to query: `fact_forecast_monthly`**
 
@@ -440,10 +441,11 @@ This step removes unnecessary redundant columns from `fact_sales_monthly`
 Sample records from query result:</br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Sales_Monthly%20remove%20redundant%20columns.PNG)
 
+<br>
 
-### Create new query: `Last_Sales_Month`
-Create a new query to generate a single date value representing the last month sales data is available in the table `fact_sales_monthly`:
+**Create new query: `Last_Sales_Month`**
 
+This query generates a single date value representing the most recent month sales data is available in `fact_sales_monthly`
 ```
 let
     LastSalesMonth = List.Max(fact_sales_monthly[date])
@@ -453,16 +455,18 @@ in
 Query result:</br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/last%20sales%20month%20query%20result.PNG)
 
+<br>
 
-### Create new query: `Refresh Date`
-Create new query to generate a single date value representing the latest day the refresh button was pressed for this dashboard:
+**Create new query: `Refresh Date`**
+
+This query generates a single date value representing the most recent date the refresh button was pressed for this dashboard:
 ```
 = DateTime.Date(DateTime.LocalNow())
 ```
 
+<br>
 
-
-### Create new query: `Combine Sales and Forecast`
+**Create new query: `Combine Sales and Forecast`**
 ```
 let
     // Filter the forecast table to only include records with dates where sales data is not avaliable
@@ -489,8 +493,11 @@ Sample records from query result:<br>
 1. All sales data from `fact_sales_monthly` up to and including the last sales month (December 2021).
 2. Forecasted sales data from `fact_forecast_monthly` starting from January 2022 onwards.
 
+<br>
 
-### Create new query: `Fact_Actuals_Estimates`
+**Create new query: `Fact_Actuals_Estimates`**
+
+This query performs the following steps:
 * Left join `Combine Sales and Forecast` with `gross_price`
 * Left join `Combine Sales and Forecast` with `pre_invoice_deductions`
 * Add calculated column for gross sales
@@ -527,14 +534,13 @@ in
 Sample records from query result:</br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Fact_Actuals_Estimates.PNG)
 
+<br>
 
-
-
-### Create new query: `dim_date`
-Create a date dimension table with three columns:
-* `date` for each calendar date. This is a primary key field.
-* `month` for calendar month (first day of the calendar month)
-* `fiscal_year` for AtliQ's fiscal year for each respective calendar date/month
+**Create new query: `dim_date`**
+This query creates a date dimension table with three columns:
+* `date` representing each calendar date. This is a primary key field.
+* `month` representing each calendar month (the first day of each calendar month)
+* `fiscal_year` representing AtliQ's fiscal year for each respective calendar date
 ```
 let
     // Find minimum date from forecast table
@@ -573,9 +579,10 @@ in
 Sample records from query result:<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/dim_date%20query.PNG)
 
+<br>
 
+**Add steps to query: `Marketshare`**
 
-### Add two steps to query: `Marketshare`
 Add two additional steps to the `marketshare` query:
 1. Transform the table to make it more suitable for building data model and visuals later.
 ```
@@ -587,7 +594,12 @@ Add two additional steps to the `marketshare` query:
 ```
 Sample records from query result:<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/marketshare%20query.PNG)
+
+<br>
+
 </details>
+
+
 
 <details>
   <summary><b>Data Cleaning</b></summary>
