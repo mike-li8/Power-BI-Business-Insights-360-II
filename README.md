@@ -47,7 +47,7 @@ AtliQ's customers are categorized into three different **channels**:
   <summary><b>Profit and Loss (P&L) Statement</b></summary>
 
 This simplified P&L statement should give a better understanding of AtliQ's business model. In this example, the P&L values are derived from one sale transaction of one product being sold to one customer.
-| Line Item | Description | P & L Value Formula | P&L Value Calculation | P & L Value |
+| P&L Line Item | Description | P&L Value Formula | P&L Value Calculation | Final P&L Value |
 | :- | :- | :- | :- | -: |
 | Gross Price |  The base price of a product | not applicable | `not applicable` | `$50.00` |
 | Pre-Invoice Deduction | For every fiscal year, the sales team determines a<br>pre-invoice deduction percentage for each<br><ins>specific customer</ins>. The pre-invoice deduction<br>percentage is based on AtliQ's relationship and<br>experience with the customer. The pre-invoice<br>deduction is applied to the gross price of the<br>product before it is billed to the customer. In this<br>example, the customer receives a pre-invoice<br>deduction of 10% of gross price. | (Gross Price $) *<br> (Pre&nbsp;Invoice&nbsp;Deduction&nbsp;%) | `$50.00` *<br>`0.10` | `$5.00` |
