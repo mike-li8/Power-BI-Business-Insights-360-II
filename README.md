@@ -21,6 +21,7 @@ Click the link below to explore the live, interactive dashboard on Power BI Serv
   <summary><b>Overview</b></summary>
 
 AtliQ manufactures computer hardware **products** (e.g., mouse, keyboard, printer, monitor) and then sells them to various **customers** which are stores such as Amazon and Best Buy. Hence, AtliQ's customers are in the form of <ins>store businesses</ins> (e.g., Amazon, Best Buy) and should not be confused with customers in the form of people (i.e., the people purchasing products from Amazon or Best Buy).
+
 <br>
 </details>
 
@@ -40,6 +41,7 @@ AtliQ's customers are categorized into three different **channels**:
    * Stores owned by AtliQ. These are AltiQ Exclusive and AtliQ E-Store.
 5. Distributor
    * Some markets have laws/regulations which only allow AtliQ to sell products to a distributor type customer within that market. AtliQ sells products to the distributor; the distributor then sells the products to various stores within that market.
+
 <br>
 </details>
 
@@ -60,7 +62,6 @@ This simplified P&L statement should give a better understanding of AtliQ's busi
 | Net Profit | AtliQ's Profit after deducting operational expenses<br>from gross margin. | (Gross Margin $) -<br>(Operational Expenses $) | `$20.00` -<br>`$15.00` | `$5.00` |
 
 <br>
-
 </details>
 
 
@@ -84,7 +85,6 @@ AtliQ's fiscal year begins in September and ends in August the following year. T
 | 	August 2021	 | 	2021	 | 	12	 | 	Q4	 |
 
 <br>
-
 </details>
 
 
