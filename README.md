@@ -93,7 +93,7 @@ AtliQ's fiscal year begins in September and ends in August the following year. T
 
 AtliQ's data engineers prepared various dimension tables and stored them in a MySQL database schema. Sample records from each dimension table are provided below.
 
-
+<br>
 dim_market
 | market | sub_zone | region |
 | :- | :- | :- |
@@ -103,7 +103,7 @@ dim_market
 
 Notes:
 * `market` is a primary key field.
-
+<br>
 
 **dim_customer**
 | customer_code | customer         | market       | platform        | channel    |
