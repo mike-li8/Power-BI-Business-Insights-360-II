@@ -418,10 +418,9 @@ The data tables from MySQL, .csv, and .xlsx were imported into **Power Query**:<
 
 
 <details>
-  <summary><b>Additional Queries created using Power Query and M-Language</b></summary>
+  <summary><b>Additional Queries</b></summary>
 
-### Add step to query: `fact_forecast_monthly`
-Remove unnecessary redundant columns:
+**Add step to query: `fact_forecast_monthly`**
 ```
 = Table.SelectColumns(fact_forecast_monthly, {"date", "product_code", "customer_code", "forecast_quantity"})
 ```
@@ -429,7 +428,7 @@ Sample records from query result:</br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/Forecast_Monthly%20remove%20redundant%20columns.PNG)
 
 
-### Add step to query: `fact_sales_monthly`
+**Add step to query: `fact_sales_monthly`**
 Remove unnecessary redundant columns:
 ```
 = Table.SelectColumns(fact_sales_monthly,{"date", "product_code", "customer_code", "sold_quantity"})
