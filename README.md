@@ -100,7 +100,7 @@ AtliQ's data engineers prepared various dimension tables and stored them in a My
 
 <br>
 
-dim_market
+**dim_market**
 | market | sub_zone | region |
 | :- | :- | :- |
 | Japan | ROA | APAC |
@@ -143,6 +143,8 @@ Notes:
 Notes:
 `customer_code` is a primary key field. 
 
+<br>
+
 **dim_product**
 | product_code  | division | segment     | category                     | product           | variant        |
 |:--------------|:---------|:------------|:-----------------------------|:------------------|:---------------|
@@ -172,6 +174,8 @@ Notes:
 
 Notes:
 `product_code` is a primary key field.
+
+<br>
 
 </details>
 
