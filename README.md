@@ -468,7 +468,7 @@ This query generates a single date value representing the most recent date the r
 
 **Create new query: `Combine Sales and Forecast`**
 
-`Combine Sales and Forecast` contains:
+`Combine Sales and Forecast` needs to have:
 1. Actual sales data from `fact_sales_monthly` up to and including the most recent month with sales data (December 2021).
 2. Forecasted sales data from `fact_forecast_monthly` starting from January 2022 onwards
 
