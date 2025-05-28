@@ -141,7 +141,7 @@ Notes:
 | 80006154      | Synthetic        | Philiphines  | Brick & Mortar   | Distributor|
 
 Notes:
-`customer_code` is a primary key field. 
+* `customer_code` is a primary key field. 
 
 <br>
 
@@ -173,7 +173,7 @@ Notes:
 | A7119160103   | N & S    | Networking  | Wi fi extender               | AQ Wi Power Dx1   | Premium        |
 
 Notes:
-`product_code` is a primary key field.
+* `product_code` is a primary key field.
 
 <br>
 
