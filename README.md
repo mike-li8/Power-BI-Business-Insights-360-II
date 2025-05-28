@@ -330,8 +330,9 @@ Notes:
 <details>
   <summary><b>Additional Data Tables</b></summary>
 
-### Additional Data Tables
 Additional data tables were provided in stakeholder meetings. Sample records from each table are provided below.
+
+<br>
 
 **operational_expenses**
 | 	market	 | 	fiscal_year	 | 	ads_promotions_pct	 | 	other_operational_expense_pct	 |
@@ -352,6 +353,8 @@ Notes:
 * This table contains data on operational expenses (as a percentage of net sales) for each specific market, on a fiscal year level.
 * The columns `market`, and `fiscal_year` make up a **composite primary key**.
 
+<br>
+
 **targets**
 | 	market	 | 	month	 | 	ns_target	 | 	gm_target	 | 	np_target	 |
 | 	:-	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 |
@@ -370,6 +373,8 @@ Notes:
 * This table contains data on benchmark targets set by AtliQ (for net sales, gross margin, and net profit). Target data is available for each specific market on a monthly level.
 * The columns `market`, and `month` make up a **composite primary key**.
 
+<br>
+
 **marketshare**
 | 	sub_zone	 | 	category	 | 	fy_desc	 | 	total_market_sales_$	 | 	atliq_sales_$	 | 	dale_sales_$	 | 	innovo_sales_$	 | 	pacer_sales_$	 | 	bp_sales_$	 | 	others_sales_$	 |
 | 	:-	 | 	:-	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 | 	-:	 |
@@ -384,7 +389,9 @@ Notes:
 
 Notes:
 * Provided in .xlsx format
-* This table contains data on the marketshare of various personal computer (PC) manufacturers (atliq, dale, innovo, pacer, bp). This marketshare data is available for each specific sub zone, product category (PC type product categories only) and fiscal year.
+* This table contains data on the marketshare of various personal computer (PC) manufacturers (atliq, dale, innovo, pacer, bp). This marketshare data is available for each specific market sub zone, PC product category, and fiscal year.
+* The columns `subzone`, `category`, and `fy_desc` act as a **composite primary key**
+
 </details>
 
 
