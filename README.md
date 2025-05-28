@@ -115,9 +115,6 @@ Notes:
 **dim_customer**
 | customer_code | customer         | market       | platform        | channel    |
 |:--------------|:-----------------|:-------------|:-----------------|:-----------|
-| 90022081      | Amazon           | USA          | E-Commerce       | Retailer   |
-| 90023023      | Amazon           | Canada       | E-Commerce       | Retailer   |
-| 90004067      | Amazon           | Japan        | E-Commerce       | Retailer   |
 | 90022082      | Amazon           | USA          | E-Commerce       | Retailer   |
 | 90023030      | Amazon           | Canada       | E-Commerce       | Retailer   |
 | 90004068      | Amazon           | Japan        | E-Commerce       | Retailer   |
