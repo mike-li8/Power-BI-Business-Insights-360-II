@@ -185,6 +185,8 @@ Notes:
 
 AtliQ's data engineers prepared various fact tables and stored them in a MySQL database schema. Sample records from each fact table are provided below.
 
+<br>
+
 **fact_forecast_monthly**
 | date       | product_code  | division | category                   | product     | customer_code | customer_name         | market    | platform      | channel  | forecast_quantity |
 |-----------:|:--------------|:---------|:---------------------------|:------------|:--------------|:----------------------|:----------|:--------------|:---------|------------------:|
@@ -205,6 +207,7 @@ Notes:
 * The columns `date`, `product_code`, and `customer_code` make up a **composite primary key**
 * Data for monthly forecast of quantity of products sold is available from the beginning of fiscal year 2018 to the end of fiscal year 2022 (September 2017 - August 2022)
 
+<br>
 
 **fact_sales_monthly**
 | date       | product_code  | division | category                   | product     | customer_code | customer_name         | market    | platform      | channel  | sold_quantity |
@@ -220,13 +223,13 @@ Notes:
 | 2019-09-01 | A6218160101   | N & S    | External Solid State Drives | AQ Digit SSD| 90020101      | Euronics              | Austria   | Brick & Mortar| Retailer | 3             |
 | 2019-09-01 | A6218160101   | N & S    | External Solid State Drives | AQ Digit SSD| 90020102      | Fnac-Darty            | Austria   | Brick & Mortar| Retailer | 6             |
 
-
 Notes:
 * This table contains data on the actual sold quantity of products for specific customers, on a monthly level
 * The data engineer provided this table in **denormalized** format
 * The columns `date`, `product_code`, and `customer_code` make up a **composite primary key**
 * Data for monthly quantity of products actually sold is available from the beginning of fiscal year 2018 (September 2017) to December 2021
 
+<br>
 
 **freight_cost**
 | 	market	 | 	fiscal_year	 | 	freight_pct	 | 	other_cost_pct	 |
@@ -246,6 +249,7 @@ Notes:
 * Freight cost is one component of COGS. This table contains data at a fiscal year level on freight cost (as a percentage of net sales) for each specific market.
 * The columns `market` and `fiscal_year` make up a **composite primary key**
 
+<br>
 
 **gross_price**
 | product_code  | fiscal_year | gross_price |
@@ -265,6 +269,7 @@ Notes:
 * Gross price is the base price of a product. This table contains data on the gross price of each specific product on a fiscal year level. 
 * The columns `product_code` and `fiscal_year` make up a **composite primary key**
 
+<br>
 
 **manufacturing_cost**
 | product_code  | cost_year | manufacturing_cost |
@@ -284,7 +289,7 @@ Notes:
 * Manufacturing cost is one component of COGS. This table contains data at a fiscal year level on manufacturing cost ($) for one unit quantity of each specific product.
 * The columns `product_code` and `cost_year` make up a **composite primary key**.
 
-
+<br>
 
 **post_invoice_deductions**
 | customer_code | product_code   | date       | discounts_pct | other_deductions_pct |
@@ -299,6 +304,8 @@ Notes:
 Notes:
 * This table contains data on post invoice deductions (as a percentage of net invoice sales) of a product for a specific customer, on a monthly level.
 * The columns `customer_code`, `product_code` and `date` make up a **composite primary key**.
+
+<br>
 
 **pre_invoice_deductions**
 | customer_code | fiscal_year | pre_invoice_discount_pct |
@@ -318,8 +325,9 @@ Notes:
 * This table contains data on pre invoice deductions (as a percentage of gross price) for each specific customer, on a fiscal year level.
 * The columns `customer_code`, and `fiscal_year` make up a **composite primary key**.
 
-</details>
+<br>
 
+</details>
 
 
 <details>
