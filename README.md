@@ -389,8 +389,8 @@ Notes:
 
 Notes:
 * Provided in .xlsx format
-* This table contains data on the marketshare of various personal computer (PC) manufacturers (atliq, dale, innovo, pacer, bp). This marketshare data is available for each specific market sub zone, PC product category, and fiscal year.
-* The columns `subzone`, `category`, and `fy_desc` act as a **composite primary key**
+* This table contains data on the marketshare of various personal computer (PC) manufacturers (atliq, dale, innovo, pacer, bp). This marketshare data is available for each specific market subzone, PC product category, and fiscal year.
+* The columns `sub_zone`, `category`, and `fy_desc` act as a **composite primary key**
 
 <br>
 
