@@ -507,29 +507,98 @@ This query performs the following steps:
 
 ```
 let
-    // Add fiscal year column to act as a key field matching records for a left join
-    #"Add fiscal year column" = Table.AddColumn(#"Combine Sales and Forecast", "fiscal_year", each Date.Year(Date.AddMonths([date],4))),
-    #"Changed fiscal_year column datatype" = Table.TransformColumnTypes(#"Add fiscal year column",{{"fiscal_year", type text}}),
+    // Add fiscal year column to act as a key field to match records in the left join
+    #"Add fiscal year column" = 
+        Table.AddColumn(
+            #"Combine Sales and Forecast", 
+            "fiscal_year", 
+            each Date.Year(
+                Date.AddMonths(
+                    [date], 
+                    4
+                )
+            )
+        ),
 
-    // Left join with gross_price table
-    #"Left Join with gross_price" = Table.NestedJoin(#"Changed fiscal_year column datatype", {"product_code", "fiscal_year"}, gross_price, {"product_code", "fiscal_year"}, "gross_price", JoinKind.LeftOuter),
-    #"Expanded gross_price" = Table.ExpandTableColumn(#"Left Join with gross_price", "gross_price", {"gross_price"}, {"gross_price"}),
+    // Change datatype of fiscal_year column to text
+    #"Changed fiscal_year column datatype" = 
+        Table.TransformColumnTypes(
+            #"Add fiscal year column", 
+            {{"fiscal_year", type text}}
+        ),
 
-    // Calculated column for gross_sales_amount
-    #"Calculated Column for gross_sales_amount" = Table.AddColumn(#"Expanded gross_price", "gross_sales_amount", each [Qty] * [gross_price]),
+    // Perform a left join with gross_price table based on product_code and fiscal_year
+    #"Left Join with gross_price" = 
+        Table.NestedJoin(
+            #"Changed fiscal_year column datatype", 
+            {"product_code", "fiscal_year"}, 
+            gross_price, 
+            {"product_code", "fiscal_year"}, 
+            "gross_price", 
+            JoinKind.LeftOuter
+        ),
 
-    // Left join with pre_invoice_deductions table
-    #"Left Join with pre_invoice_deductions" = Table.NestedJoin(#"Calculated Column for gross_sales_amount", {"customer_code", "fiscal_year"}, pre_invoice_deductions, {"customer_code", "fiscal_year"}, "pre_invoice_deductions", JoinKind.LeftOuter),
-    #"Expanded pre_invoice_deductions" = Table.ExpandTableColumn(#"Left Join with pre_invoice_deductions", "pre_invoice_deductions", {"pre_invoice_discount_pct"}, {"pre_invoice_discount_pct"}),
+    // Expand the gross_price column to include the actual gross price values
+    #"Expanded gross_price" = 
+        Table.ExpandTableColumn(
+            #"Left Join with gross_price", 
+            "gross_price",
+            {"gross_price"},
+            {"gross_price"}
+        ),
 
-    // Calculated column for net_invoice_sales_amount
-    #"Calculated column for net_invoice_sales_amount" = Table.AddColumn(#"Expanded pre_invoice_deductions", "net_invoice_sales_amount", each [gross_sales_amount] - [gross_sales_amount] * [pre_invoice_discount_pct]),
+    // Calculate gross sales amount (Qty * gross_price)
+    #"Calculated Column for gross_sales_amount" = 
+        Table.AddColumn(
+            #"Expanded gross_price", 
+            "gross_sales_amount", 
+            each [Qty] * [gross_price]
+        ),
 
-    // Remove unnecessary columns used to help with the join
-    #"Removed unnecessary redundant columns" = Table.RemoveColumns(#"Calculated column for net_invoice_sales_amount",{"fiscal_year", "gross_price", "pre_invoice_discount_pct"}),
+    // Perform a left join with pre_invoice_deductions table based on customer_code and fiscal_year
+    #"Left Join with pre_invoice_deductions" = 
+        Table.NestedJoin(
+            #"Calculated Column for gross_sales_amount", 
+            {"customer_code", "fiscal_year"}, 
+            pre_invoice_deductions, 
+            {"customer_code", "fiscal_year"}, 
+            "pre_invoice_deductions", 
+            JoinKind.LeftOuter
+        ),
 
-    // Set datatypes for columns
-    #"Set columns to appropriate datatypes" = Table.TransformColumnTypes(#"Removed unnecessary redundant columns",{{"gross_sales_amount", Currency.Type}, {"net_invoice_sales_amount", Currency.Type}})
+    // Expand the pre_invoice_deductions column to get the discount percentage
+    #"Expanded pre_invoice_deductions" = 
+        Table.ExpandTableColumn(
+            #"Left Join with pre_invoice_deductions", 
+            "pre_invoice_deductions", 
+            {"pre_invoice_discount_pct"}, 
+            {"pre_invoice_discount_pct"}
+        ),
+
+    // Calculate net invoice sales (gross_sales_amount - pre-invoice discount amount)
+    #"Calculated column for net_invoice_sales_amount" = 
+        Table.AddColumn(
+            #"Expanded pre_invoice_deductions", 
+            "net_invoice_sales_amount", 
+            each [gross_sales_amount] - [gross_sales_amount] * [pre_invoice_discount_pct]
+        ),
+
+    // Remove unnecessary columns
+    #"Removed unnecessary redundant columns" = 
+        Table.RemoveColumns(
+            #"Calculated column for net_invoice_sales_amount", 
+            {"fiscal_year", "gross_price", "pre_invoice_discount_pct"}
+        ),
+
+    // Set appropriate data types for the columns
+    #"Set columns to appropriate datatypes" = 
+        Table.TransformColumnTypes(
+            #"Removed unnecessary redundant columns", 
+            {
+                {"gross_sales_amount", Currency.Type},
+                {"net_invoice_sales_amount", Currency.Type}
+            }
+        )
 in
     #"Set columns to appropriate datatypes"
 ```
