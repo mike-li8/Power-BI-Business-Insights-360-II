@@ -406,7 +406,7 @@ Notes:
 
 
 
-## ETL (Extract Transform Load) and Data Cleaning in Power Query
+## ETL (Extract Transform Load) using Power Query
 
 
 <details>
