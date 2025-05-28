@@ -507,6 +507,8 @@ This query performs the following steps:
 
 ```
 let
+
+
     // Add fiscal year column to act as a key field to match records in the left join
     #"Add fiscal year column" = 
         Table.AddColumn(
@@ -599,6 +601,8 @@ let
                 {"net_invoice_sales_amount", Currency.Type}
             }
         )
+
+
 in
     #"Set columns to appropriate datatypes"
 ```
