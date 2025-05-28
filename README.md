@@ -32,7 +32,7 @@ AtliQ's customers are categorized into two different **platforms**:
    * stores that have physical location(s)
 2. E-Commerce
    * stores which only sell products online
-
+<br>
 AtliQ's customers are categorized into three different **channels**:
 1. Retailer
    * Stores not owned by AtliQ (e.g. Amazon, Best Buy)
