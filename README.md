@@ -299,7 +299,7 @@ Notes:
 | 70002017      | A0219150201    | 2021-10-01 | 0.268149981   | 0.077287177          |
 
 Notes:
-* This table contains data on post invoice deductions (as a percentage of net invoice sales) of a product for a specific customer, on a monthly level.
+* This table contains data on post-invoice deductions (as a percentage of net invoice sales) of a product for a specific customer, on a monthly level.
 * The columns `customer_code`, `product_code` and `date` make up a **composite primary key**.
 
 <br>
@@ -319,7 +319,7 @@ Notes:
 | 70002018      | 2022        | 0.2930927104              |
 
 Notes:
-* This table contains data on pre invoice deductions (as a percentage of gross price) for each specific customer, on a fiscal year level.
+* This table contains data on pre-invoice deductions (as a percentage of gross price) for each specific customer, on a fiscal year level.
 * The columns `customer_code`, and `fiscal_year` make up a **composite primary key**.
 
 <br>
