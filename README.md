@@ -1294,8 +1294,7 @@ UNION(
 <br>
 
 **Filter Context Check**
-
-Target benchmark data is only avaliable for the following KPIs: net sales, gross margin, and net profit. Since target data is only avaliable at the market level, the target benchmark should not be displayed when more granular filters such as products or customers are applied. To enforce this logic, the following DAX expression is used to check the filter context:
+<br>Target benchmark data is only avaliable for the following KPIs: net sales, gross margin, and net profit. Since target data is only avaliable at the market level, the target benchmark should not be displayed when more granular filters such as products or customers are applied. To enforce this logic, the following DAX expression is used to check the filter context:
 ```
 Customer_Product_FilterContext_Check = ISCROSSFILTERED(dim_product[product]) || ISFILTERED(dim_customer[customer])
 ```
