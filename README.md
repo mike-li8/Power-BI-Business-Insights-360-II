@@ -714,14 +714,17 @@ Sample records from query result:<br>
 <details>
   <summary><b>Data Cleaning</b></summary>
 
-Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process.
-Various data cleaning tasks were formed using Power Query (this list is not exhaustive):
-* Identifying duplicate values and rectifying them with an appropriate method
-* Investigating outliers in quantitative fields with business stakeholders and removing them if appropriate.
-* Text fields: fixing spelling mistakes, removing extra white space
-* Ensuring primary key fields contain unique values
-* Ensuring composite primary key fields contain unique combinations of values
-* Connecting with business stakeholders to determine an appropriate interpretation of null/blank values and rectifying them with an appropriate method if needed.
+Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process. For example, the 'dim_customer` table had spelling mistakes in the "customer" column that needed to be fixed:
+```
+Table.ReplaceValue(dim_customer,"AltiQ Exclusive","AtliQ Exclusive",Replacer.ReplaceText,{"customer"})
+```
+```
+Table.ReplaceValue(dim_customer,"Atliq Exclusive","AtliQ Exclusive",Replacer.ReplaceText,{"customer"})
+```
+```
+// remove whitespaces
+Table.TransformColumns(dim_customer,{{"customer", Text.Trim, type text}})
+```
 
 <br>
 
