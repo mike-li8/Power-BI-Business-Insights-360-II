@@ -698,7 +698,7 @@ Add two additional steps to the `marketshare` query:
 ```
 = Table.UnpivotOtherColumns(marketshare, {"sub_zone", "category", "fy_desc", "total_market_sales_$"}, "Manufacturer", "sales_$")
 ```
-2. In the "Manufacturer" column, remove the text "sales_$" after the "_" delimiter to make the manufacturer names clean.
+2. In the "Manufacturer" column, remove the text "sales_$" after the first "_" delimiter to make the manufacturer names clean.
 ```
 = Table.TransformColumns(marketshare, {{"Manufacturer", each Text.BeforeDelimiter(_, "_"), type text}})
 ```
@@ -713,6 +713,7 @@ Sample records from query result:<br>
 
 <details>
   <summary><b>Data Cleaning</b></summary>
+
 Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process.
 Various data cleaning tasks were formed using Power Query (this list is not exhaustive):
 * Identifying duplicate values and rectifying them with an appropriate method
@@ -721,6 +722,9 @@ Various data cleaning tasks were formed using Power Query (this list is not exha
 * Ensuring primary key fields contain unique values
 * Ensuring composite primary key fields contain unique combinations of values
 * Connecting with business stakeholders to determine an appropriate interpretation of null/blank values and rectifying them with an appropriate method if needed.
+
+<br>
+
 </details>
 
 <details>
