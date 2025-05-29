@@ -1466,7 +1466,7 @@ IF(
 <br>
 
 **Supply Chain Benchmark Measures**
-Note: YoY is the only benchmark available and/or applicable to supply chain KPIs.
+<br>Note: YoY is the only benchmark available and/or applicable to supply chain KPIs.
 ```
 Net_Error_SPLY = 
 CALCULATE(
