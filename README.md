@@ -747,28 +747,34 @@ The image below shows the final queries loaded from Power Query to Power BI. To 
 
 
 
-## Data Modelling
-
+## DAX Expressions to Create Tables
 <details>
 
   <summary><b>DAX Expressions to Create Tables</b></summary>
 
 To help build the data model, three new dimension tables were created using DAX.
 
-### `fiscal_year` table
+<br>
+
+**`fiscal_year`**
 ```
 fiscal_year = ALLNOBLANKROW(dim_date[fiscal_year])
 ```
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/dax%20fiscal%20year%20table.PNG)
 
-### `sub_zone` table
+<br>
+
+**`sub_zone`**
 ```
 // Unique market sub zones
 sub_zone = ALLNOBLANKROW(dim_market[sub_zone])
 ```
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/subzone%20dax%20table.PNG)
 
-### `category` table
+<br>
+
+**`category`**
+
 ```
 // Unique product categories
 category = ALLNOBLANKROW(dim_product[category])
@@ -778,11 +784,11 @@ category = ALLNOBLANKROW(dim_product[category])
 </details>
 
 
-
+## Building the Data Model
 <details>
   <summary><b>Building the Data Model</b></summary>
 
-The image below shows the completed data model (snowflake schema) in Power BI Model View:<br>
+The image below shows the completed data model in Power BI Model View:<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/data%20model%20dax.PNG)
 </details>
 
@@ -795,7 +801,9 @@ The image below shows the completed data model (snowflake schema) in Power BI Mo
 
 To facilitate dashboard building, DAX expressions were used to create new columns in the tables `dim_date`, `dim_products`, and `Fact_Actuals_Estimates`
 
-### Calculated Columns in `dim_date`
+<br>
+
+**Calculated Columns in `dim_date`**
 ```
 fiscal_quarter = 
 SWITCH(
@@ -834,12 +842,16 @@ IF(
 )
 ```
 
-### Calculated Column in `dim_product`
+<br>
+
+**Calculated Column in `dim_product`**
 ```
 product_and_variant = dim_product[product] & " [" & dim_product[variant] & "]"
 ```
 
-### Calculated Columns in `Fact_Actuals_Estimates`
+<br>
+
+**Calculated Columns in `Fact_Actuals_Estimates`**
 ```
 post_invoice_deduction_amount =
 // Retrieve post invoice deduction percent for each row
@@ -925,16 +937,7 @@ RETURN res * Fact_Actuals_Estimates[net_sales_amount]
 
 
 
-
-
-
-
-
-
-
-
-
-## DAX Measures
+## Main DAX Measures
 
 <details>
   <summary><b>Main KPIs</b></summary>
