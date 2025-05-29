@@ -1262,12 +1262,13 @@ IF(
 
 ## Dynamic Benchmark
 <details>
-  <summary><b>DAX Table</b></summary>
+  <summary><b>Create Switch using DAX Table and Slicer Visual</b></summary>
 
 This dashboard enables users to compare certain KPIs against two types of benchmarks. A toggle switch allows users to switch between the following benchmark options:
 1.	Year-over-Year (YoY) – Compares KPI values for the current time period to the same time period in the previous year.
 2.	Target – Compares current KPI values to predefined business targets set by stakeholders.
 
+<br>
 
 To create this toggle switch (using slicer visual):<br>
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20toggle%20switch.PNG)<br>
@@ -1281,10 +1282,12 @@ UNION(
 ```
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/BM%20Switch%20table.PNG)
 
+<br>
+
 </details>
 
 <details>
-  <summary><b>DAX Measures</b></summary>
+  <summary><b>DAX Measures for Dynamic Benchmark</b></summary>
 
 **Filter Context Check**
 Target benchmark data is only avaliable for the following KPIs: net sales, gross margin, and net profit. Since target data is only avaliable at the market level, the target benchmark should not be displayed when more granular filters such as products or customers are applied. To enforce this logic, the following DAX expression is used to check the filter context:
