@@ -737,7 +737,7 @@ Table.TransformColumns(dim_customer,{{"customer", Text.Trim, type text}})
 <details>
   <summary><b>Final Queries Loaded</b></summary>
 
-The image below shows the final queries loaded from Power Query to Power BI. To improve query load time, queries not required to build the Power BI dashboard have their load disabled (queries in *italic* in the image below have their load disabled). Queries with their load disabled are either intermediate query steps or queries containing data that are already included in queries with their load enabled.<br>
+The image below shows the final queries loaded from Power Query to Power BI. To improve query load time, queries not required to build the dashboard and/or data model have their load disabled (queries in *italic* in the image below have their load disabled). Queries with their load disabled are either intermediate query steps or queries containing data that are already included in queries with their load enabled.<br>
 
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/final%20queries%20loaded.PNG)
 
