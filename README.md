@@ -615,7 +615,7 @@ Sample records from query result:</br>
 
 This query creates a date dimension table with three columns:
 * `date` representing each calendar date. This is a primary key field.
-* `month` representing each calendar month (the first day of each calendar month)
+* `month` representing each calendar month for each respective caldendar date
 * `fiscal_year` representing AtliQ's fiscal year for each respective calendar date
 ```
 let
