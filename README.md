@@ -1145,13 +1145,16 @@ DIVIDE(
 At AtliQ Technologies, supply chain metrics must be calculated for **each product on a montly level**. The screenshot below gives an example of how supply chain metrics are calculated for **one specific product** for a given fiscal year.
 ![image alt](https://raw.githubusercontent.com/mike-li8/Power-BI-Business-Insights-360-II/refs/heads/main/Screenshots/SupplyChain%20Example.PNG)
 
+<br>
 
-Last Sales Month
+**Last Sales Month**
 ```
 Most_Recent_Month_With_Sales_Data = MAX(LastSalesMonth[LastSalesMonth])
 ```
 
-Sold Quantity
+<br>
+
+**Sold Quantity**
 ```
 Sold_Quantity = 
 CALCULATE(
@@ -1163,7 +1166,9 @@ CALCULATE(
 )
 ```
 
-Forecasted Quantity
+<br>
+
+**Forecasted Quantity**
 ```
 Forecasted_Quantity = 
 CALCULATE(
@@ -1175,7 +1180,9 @@ CALCULATE(
 )
 ```
 
-Net Error and Inventory Risk
+<br>
+
+**Net Error and Inventory Risk**
 ```
 Net_Error = 
 IF(
@@ -1199,7 +1206,9 @@ SWITCH(
 )
 ```
 
-Absolute Error
+<br>
+
+**Absolute Error**
 ```
 ABS_Error = 
 
@@ -1237,7 +1246,9 @@ IF(
 )
 ```
 
-Forecast Accuracy %
+<br>
+
+**Forecast Accuracy %**
 ```
 Forecast_Accuracy_% = 
 IF(
