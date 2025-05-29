@@ -714,13 +714,19 @@ Sample records from query result:<br>
 <details>
   <summary><b>Data Cleaning</b></summary>
 
-Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process. For example, the 'dim_customer` table had spelling mistakes in the "customer" column that needed to be fixed:
+Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process.
+
+For instance, the `dim_customer` table contained several spelling mistakes in the "customer" column, which needed to be corrected to ensure data consistency across the dataset. The following steps were taken:
+
+1. Replaced misspelled customer names such as "AltiQ Exclusive" and "Atliq Exclusive" with the correct value "AtliQ Exclusive" to ensure consistency.
 ```
 Table.ReplaceValue(dim_customer,"AltiQ Exclusive","AtliQ Exclusive",Replacer.ReplaceText,{"customer"})
 ```
 ```
 Table.ReplaceValue(dim_customer,"Atliq Exclusive","AtliQ Exclusive",Replacer.ReplaceText,{"customer"})
 ```
+
+2. Removed any leading or trailing whitespace in the "customer" column to standardize the text entries
 ```
 // remove whitespaces
 Table.TransformColumns(dim_customer,{{"customer", Text.Trim, type text}})
