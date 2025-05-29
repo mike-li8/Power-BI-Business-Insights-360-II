@@ -1291,12 +1291,16 @@ UNION(
 <details>
   <summary><b>DAX Measures for Dynamic Benchmark</b></summary>
 
+<br>
+
 **Filter Context Check**
 Target benchmark data is only avaliable for the following KPIs: net sales, gross margin, and net profit. Since target data is only avaliable at the market level, the target benchmark should not be displayed when more granular filters such as products or customers are applied. To enforce this logic, the following DAX expression is used to check the filter context:
 ```
 Customer_Product_FilterContext_Check = ISCROSSFILTERED(dim_product[product]) || ISFILTERED(dim_customer[customer])
 ```
 When this measure returns true, it is not appropriate to display the target benchmark values related to net sales, gross margin, and net profit.
+
+<br>
 
 **Net Sales Benchmark Measures**
 ```
@@ -1339,19 +1343,7 @@ IF(
 )
 ```
 
-**Gross Margin Benchmark Measures**
-```
-GM_$_Target = 
-
-VAR target = SUM(fact_targets[gm_target])
-
-RETURN
-IF(
-    [Customer_Product_FilterContext_Check],
-    BLANK(),
-    target
-)
-```
+<br>
 
 **Gross Margin % Benchmark Measures**
 ```
@@ -1411,20 +1403,7 @@ IF(
 )
 ```
 
-**Net Profit Benchmark Measures**
-```
-NP_$_Target = 
-
-VAR target = SUM(fact_targets[np_target])
-
-RETURN
-IF(
-    [Customer_Product_FilterContext_Check],
-    BLANK(),
-    target
-)
-```
-
+<br>
 
 **Net Profit % Benchmark Measures**
 ```
@@ -1484,8 +1463,10 @@ IF(
 )
 ```
 
+<br>
+
 **Supply Chain Benchmark Measures**
-YoY is the only benchmark available and/or applicable to supply chain KPIs.
+Note: YoY is the only benchmark available and/or applicable to supply chain KPIs.
 ```
 Net_Error_SPLY = 
 CALCULATE(
