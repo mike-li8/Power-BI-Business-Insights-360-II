@@ -714,9 +714,7 @@ Sample records from query result:<br>
 <details>
   <summary><b>Data Cleaning</b></summary>
 
-Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process.
-
-For instance, the `dim_customer` table contained several spelling mistakes in the "customer" column, which needed to be corrected to ensure data consistency across the dataset. The following steps were taken:
+Data cleaning is a vital step to reduce the likelihood of errors and biases when business stakeholders use the final dashboard to inform the decision-making process. For instance, the `dim_customer` table contained several spelling mistakes in the "customer" column, which needed to be corrected to ensure data consistency across the dataset. The following steps were taken:
 
 1. Replaced misspelled customer names such as "AltiQ Exclusive" and "Atliq Exclusive" with the correct value "AtliQ Exclusive" to ensure consistency.
 ```
