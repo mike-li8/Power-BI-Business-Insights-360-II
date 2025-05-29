@@ -979,27 +979,34 @@ result * FactActualsEstimates[net_sales_amount]
 
 
 
-## Main DAX Measures
-
+## Core DAX Measures
 <details>
   <summary><b>Main KPIs</b></summary>
 
-Gross Sales
+<br>
+
+**Gross Sales**
 ```
 GS_$ = SUM(FactActualsEstimates[gross_sales_amount])
 ```
 
-Net Invoice Sales
+<br>
+
+**Net Invoice Sales**
 ```
 NIS_$ = SUM(FactActualsEstimates[net_invoice_sales_amount])
 ```
 
-Pre Invoice Deductions
+<br>
+
+**Pre Invoice Deductions**
 ```
 Pre_Invoice_Deduction_$ = [GS_$] - [NIS_$]
 ```
 
-Post Invoice Deductions
+<br>
+
+**Post Invoice Deductions**
 ```
 Post_Invoice_Deduction_Main_$ = SUM(FactActualsEstimates[post_invoice_deduction_amount])
 ```
@@ -1010,12 +1017,16 @@ Post_Invoice_Deduction_Other_$ = SUM(FactActualsEstimates[post_invoice_other_ded
 Post_Invoice_Deduction_Total_$ = [Post_Invoice_Deduction_Main_$] + [Post_Invoice_Deduction_Other_$]
 ```
 
-Net Sales
+<br>
+
+**Net Sales**
 ```
 NS_$ = SUM(FactActualsEstimates[net_sales_amount])
 ```
 
-Cost of Goods Sold (COGS)
+<br>
+
+**Cost of Goods Sold (COGS)**
 ```
 Manufacturing_Cost_$ = SUM(FactActualsEstimates[manufacturing_cost])
 ```
@@ -1029,7 +1040,9 @@ Other_Cost_$ = SUM(FactActualsEstimates[other_cost])
 Total_COGS_$ = [Manufacturing_Cost_$] + [Freight_Cost_$] + [Other_Cost_$]
 ```
 
-Gross Margin
+<br>
+
+**Gross Margin**
 ```
 GM_$ = [NS_$] - [Total_COGS_$]
 ```
@@ -1040,7 +1053,9 @@ GM_% = DIVIDE([GM_$], [NS_$], 0)
 GM / Unit = DIVIDE([GM_$], SUM(FactActualsEstimates[Qty]), 0)
 ```
 
-Operational Expenses
+<br>
+
+**Operational Expenses**
 ```
 Ads_&_Promotions_$ = SUM(FactActualsEstimates[ads_promotion])
 ```
@@ -1051,7 +1066,9 @@ Other_Operational_Expense_$ = SUM(FactActualsEstimates[other_operational_expense
 Total_Operational_Expense_$ = [Ads_&_Promotions_$] + [Other_Operational_Expense_$]
 ```
 
-Net Profit
+<br>
+
+**Net Profit**
 ```
 NP_$ = [GM_$] - [Total_Operational_Expense_$]
 ```
@@ -1062,7 +1079,9 @@ NP_% = DIVIDE([NP_$], [NS_$], 0)
 NP / Unit = DIVIDE([NP_$], SUM(FactActualsEstimates[Qty]), 0)
 ```
 
-Marketshare
+<br>
+
+**Marketshare**
 ```
 AtliQ_PC_Marketshare_% = 
 
@@ -1094,7 +1113,9 @@ DIVIDE(
 )
 ```
 
-Revenue Contribution %
+<br>
+
+**Revenue Contribution Percentage**
 ```
 RC_% = 
 DIVIDE(
@@ -1108,6 +1129,8 @@ DIVIDE(
     0
 )
 ```
+
+<br>
 
 </details>
 
