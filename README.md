@@ -612,6 +612,7 @@ Sample records from query result:</br>
 <br>
 
 **Create new query: `dim_date`**
+
 This query creates a date dimension table with three columns:
 * `date` representing each calendar date. This is a primary key field.
 * `month` representing each calendar month (the first day of each calendar month)
