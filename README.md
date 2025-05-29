@@ -819,11 +819,19 @@ SWITCH(
 )
 ```
 ```
-ytd_ytg = 
+ytd_ytg2 = 
 
-VAR current_fiscal_month = MONTH(DATE(YEAR(dim_date[date]), MONTH(dim_date[date]) + 4, 1))
 
-VAR most_recent_calendar_month_with_sales = [Most_Recent_Month_With_Sales_Data]
+VAR current_fiscal_month =
+MONTH(
+    DATE(
+        YEAR(dim_date[date]),
+        MONTH(dim_date[date]) + 4,
+        1
+    )
+)
+
+VAR most_recent_calendar_month_with_sales = MAX(LastSalesMonth[LastSalesMonth])
 
 VAR most_recent_fiscal_month_with_sales =
 MONTH(
@@ -833,6 +841,7 @@ MONTH(
         1
     )
 )
+
 
 RETURN
 IF(
