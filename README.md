@@ -698,7 +698,7 @@ Add two additional steps to the `marketshare` query:
 ```
 = Table.UnpivotOtherColumns(marketshare, {"sub_zone", "category", "fy_desc", "total_market_sales_$"}, "Manufacturer", "sales_$")
 ```
-2. Remove the text "sales_$" after the "_" delimiter for each manufacturer name.
+2. In the "Manufacturer" column, remove the text "sales_$" after the "_" delimiter to make the manufacturer names clean.
 ```
 = Table.TransformColumns(marketshare, {{"Manufacturer", each Text.BeforeDelimiter(_, "_"), type text}})
 ```
