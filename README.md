@@ -619,34 +619,68 @@ This query creates a date dimension table with three columns:
 * `fiscal_year` representing AtliQ's fiscal year for each respective calendar date
 ```
 let
+
+
     // Find minimum date from forecast table
     MinForecastDate = List.Min(fact_forecast_monthly[date]),
+
     // Find minimum date from sales table
     MinSalesDate = List.Min(fact_sales_monthly[date]),
-    // Find the lower of MinForecastDate and MinSalesDate. This is the lowest date in dim_date table.
+
+    // Find the lower of MinForecastDate and MinSalesDate. This is the earliest date in dim_date table.
     StartDate = List.Min({MinForecastDate, MinSalesDate}),
 
     // Find maximum date from forecast table
     MaxForecastDate = List.Max(fact_forecast_monthly[date]),
+
     // Find maximum date from sales table
     MaxSalesDate = List.Max(fact_sales_monthly[date]),
+
     // Find the higher of MaxForecastDate and MaxSalesDate. This is the highest date in dim_date table.
     EndDate = List.Max({MaxForecastDate, MaxSalesDate}),
 
     // Create a list of dates from StartDate to EndDate and sort ascending
-    DateList = List.Dates(StartDate, Duration.Days(EndDate - StartDate) + 1, #duration(1, 0, 0, 0)),
+    DateList =
+        List.Dates(
+            StartDate,
+            Duration.Days(EndDate - StartDate) + 1,
+            #duration(1, 0, 0, 0)
+        ),
     DateList_SortASC = List.Sort(DateList,Order.Ascending),
 
     // Convert list of dates to table and assign appropriate datatype to date column
-    DateTable = Table.FromList(DateList_SortASC, Splitter.SplitByNothing(), {"date"}),
+    DateTable =
+        Table.FromList(
+            DateList_SortASC,
+            Splitter.SplitByNothing(),
+            {"date"}
+        ),
     #"Changed data type of date column" = Table.TransformColumnTypes(DateTable,{{"date", type date}}),
 
     // Since data in forecast and sales tables are aggregated on a monthly level,
-    // add a month column representing the first day of the month
-    #"Add month column" = Table.AddColumn(#"Changed data type of date column", "month", each Date.StartOfMonth([date]), type date),
+    // add a month column with values for the first day of each month
+    #"Add month column" =
+        Table.AddColumn(
+            #"Changed data type of date column",
+            "month",
+            each Date.StartOfMonth([date]),
+            type date
+        ),
 
-    // Add column for AtliQ's fiscal year by adding 4 months to the calendar month
-    #"Add Fiscal Year column" = Table.AddColumn(#"Add month column", "fiscal_year", each Text.From(Date.Year(Date.AddMonths([month], 4))), type text)
+    // Add a text column for AtliQ's fiscal year by adding 4 months
+    // to each calendar month and taking the year
+    #"Add Fiscal Year column" =
+        Table.AddColumn(
+            #"Add month column",
+            "fiscal_year",
+            each Text.From(
+                Date.Year(
+                    Date.AddMonths([month], 4)
+                )
+            ),
+            type text
+        )
+
 
 in
     #"Add Fiscal Year column"
