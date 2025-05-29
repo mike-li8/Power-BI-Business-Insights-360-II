@@ -865,12 +865,14 @@ product_and_variant = dim_product[product] & " [" & dim_product[variant] & "]"
 post_invoice_deduction_amount =
 
 VAR result =
+// Retrieve post-invoice deduction percentage for each row
 CALCULATE(
     MAX(post_invoice_deductions[discounts_pct]),
     RELATEDTABLE(post_invoice_deductions)
 )
 
 RETURN
+// Calculate post-invoice deduction amount for each row
 result * FactActualsEstimates[net_invoice_sales_amount]
 ```
 
@@ -878,17 +880,20 @@ result * FactActualsEstimates[net_invoice_sales_amount]
 post_invoice_other_deduction_amount = 
 
 VAR result =
+// Retrieve post-invoice other deduction percentage for each row
 CALCULATE(
     MAX(post_invoice_deductions[other_deductions_pct]),
     RELATEDTABLE(post_invoice_deductions)
 )
 
 RETURN
+// Calculate post-invoice other deduction amount for each row
 result * FactActualsEstimates[net_invoice_sales_amount]
 ```
 
 ```
 net_sales_amount =
+// Calculate net sales (revenue) for each row
 FactActualsEstimates[net_invoice_sales_amount] -
 FactActualsEstimates[post_invoice_deduction_amount] -
 FactActualsEstimates[post_invoice_other_deduction_amount]
@@ -898,24 +903,30 @@ FactActualsEstimates[post_invoice_other_deduction_amount]
 manufacturing_cost = 
 
 VAR result =
+// Retrieve manufacturing cost per unit of sold quantity for each row
 CALCULATE(
     MAX(manufacturing_cost[manufacturing_cost]),
     RELATEDTABLE(manufacturing_cost)
 )
 
-RETURN result * FactActualsEstimates[Qty]
+
+RETURN
+// Calculate total manufacturing cost for each row based on quantity sold
+result * FactActualsEstimates[Qty]
 ```
 
 ```
 freight_cost = 
 
 VAR result =
+// Retrieve freight cost percentage for each row
 CALCULATE(
     MAX(freight_cost[freight_pct]),
     RELATEDTABLE(freight_cost)
 )
 
 RETURN
+// Calculate freight cost amount for each row
 result * FactActualsEstimates[net_sales_amount]
 ```
 
@@ -923,12 +934,14 @@ result * FactActualsEstimates[net_sales_amount]
 other_cost = 
 
 VAR result =
+// Retrieve other cost percentage for each row
 CALCULATE(
     MAX(freight_cost[other_cost_pct]),
     RELATEDTABLE(freight_cost)
 )
 
 RETURN
+// Calculate other cost amount for each row
 result * FactActualsEstimates[net_sales_amount]
 ```
 
@@ -936,12 +949,14 @@ result * FactActualsEstimates[net_sales_amount]
 ads_promotion = 
 
 VAR result =
+// Retrieve ads and promotions cost percentage for each row
 CALCULATE(
     MAX('Operational Expense'[ads_promotions_pct]),
     RELATEDTABLE('Operational Expense')
 )
 
 RETURN
+// Calculate ads and promotions amount for each row
 result * FactActualsEstimates[net_sales_amount]
 ```
 
@@ -949,12 +964,14 @@ result * FactActualsEstimates[net_sales_amount]
 other_operational_expense = 
 
 VAR result =
+// Retrieve other operational expenses cost percentage for each row
 CALCULATE(
     MAX('Operational Expense'[other_operational_expense_pct]),
     RELATEDTABLE('Operational Expense')
 )
 
 RETURN
+// Calculate other operational expenses amount for each row
 result * FactActualsEstimates[net_sales_amount]
 ```
 </details>
