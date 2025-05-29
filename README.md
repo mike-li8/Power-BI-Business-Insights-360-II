@@ -1347,6 +1347,13 @@ IF(
 
 **Gross Margin % Benchmark Measures**
 ```
+GM_%_SPLY = 
+CALCULATE(
+    [GM_%],
+    SAMEPERIODLASTYEAR(dim_date[date])
+)
+```
+```
 GM_%_Target = 
 
 VAR target = 
@@ -1361,13 +1368,6 @@ IF(
     [Customer_Product_FilterContext_Check],
     BLANK(),
     target
-)
-```
-```
-GM_%_SPLY = 
-CALCULATE(
-    [GM_%],
-    SAMEPERIODLASTYEAR(dim_date[date])
 )
 ```
 ```
