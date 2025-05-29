@@ -1262,7 +1262,7 @@ IF(
 
 ## Dynamic Benchmark
 <details>
-  <summary><b>Create Switch using DAX Table and Slicer Visual</b></summary>
+  <summary><b>Create Benchmark Switch using DAX Table and Slicer Visual</b></summary>
 
 This dashboard enables users to compare certain KPIs against two types of benchmarks. A toggle switch allows users to switch between the following benchmark options:
 1.	Year-over-Year (YoY) – Compares KPI values for the current time period to the same time period in the previous year.
