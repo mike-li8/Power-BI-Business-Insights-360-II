@@ -819,7 +819,7 @@ SWITCH(
 )
 ```
 ```
-ytd_ytg2 = 
+ytd_ytg = 
 
 
 VAR current_fiscal_month =
