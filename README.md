@@ -795,7 +795,7 @@ The image below shows the completed data model in Power BI Model View:<br>
 
 
 
-
+## DAX Calculated Columns
 <details>
   <summary><b>DAX Calculated Columns</b></summary>
 
